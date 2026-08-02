@@ -1,0 +1,6 @@
+spring:
+  ai:
+    vertex:
+      ai:
+        gemini:
+          api-key: ${GEMINI_API_KEY}

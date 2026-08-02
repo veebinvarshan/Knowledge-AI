@@ -1,0 +1,1 @@
+Enterprise Knowledge Platform validation document. This is a text file that contains plain text context about platform deployment guidelines.
