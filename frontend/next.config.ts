@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  // Configure any next options here
+  output: "standalone",
 };
 
 export default nextConfig;
