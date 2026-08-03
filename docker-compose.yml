@@ -59,8 +59,8 @@ services:
       dockerfile: Dockerfile
     container_name: knowledge-backend
     restart: unless-stopped
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DB}
@@ -94,14 +94,14 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost}
     container_name: knowledge-frontend
     restart: unless-stopped
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8080}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost}
       - API_URL=http://knowledge-backend:8080
     depends_on:
       - knowledge-backend
@@ -109,6 +109,26 @@ services:
       - knowledge-network
     healthcheck:
       test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:3000 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  knowledge-nginx:
+    image: knowledge-nginx:latest
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: knowledge-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - knowledge-frontend
+      - knowledge-backend
+    networks:
+      - knowledge-network
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1/nginx-health || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
