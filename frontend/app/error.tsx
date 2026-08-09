@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 import { AlertCircle } from "lucide-react";
 
 export default function Error({
@@ -30,12 +31,12 @@ export default function Error({
         >
           Try Again
         </button>
-        <a
+        <Link
           href="/"
           className="px-5 py-2.5 bg-gradient-to-r from-sky-400 to-indigo-500 text-slate-950 font-semibold rounded-lg text-sm hover:opacity-90 transition-all"
         >
           Return Home
-        </a>
+        </Link>
       </div>
     </div>
   );
