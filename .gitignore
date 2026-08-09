@@ -44,3 +44,31 @@ docker/*_data/
 docker/*.log
 temp/
 tmp/
+
+# --- Logs ---
+logs/
+*.log
+
+# --- Local Storage ---
+storage/
+temp-storage/
+lucene-index/
+
+# --- Docker Volumes ---
+postgres_data/
+redis_data/
+qdrant_data/
+
+# --- Maven Wrapper Cache ---
+.mvn/wrapper/dists/
+
+# --- IntelliJ ---
+.idea/
+
+# --- VS Code ---
+.vscode/
+
+# --- Misc ---
+*.pid
+*.seed
+*.lock
