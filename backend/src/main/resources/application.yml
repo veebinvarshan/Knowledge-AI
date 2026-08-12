@@ -19,7 +19,7 @@ spring:
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:knowledge_db}
     username: ${DB_USER:postgres}
-    password: WRONG_PASSWORD_TEST
+    password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
